@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<script src="bonsai-0.4.1.min.js" charset="utf-8"></script>
 	</head>
 	<body>
 	<input id="evaluation" type="number" name="evalution" min="0" value="1000"/>
@@ -12,15 +13,15 @@
     <input id="curva" type="checkbox" name="" checked onclick="selectCurva"/>
     <label> Curva de Bézier </label>
     <div id="movie" style="border-style: solid;border-color: pink;"></div>
-    <script src="bonsai-0.4.1.min.js"></script>
 	<div id="movie"></div>
 	<script>
- 		 bonsai.run(document.getElementById('movie'), {
- 		 	url: 'JSLindo.js',
- 		 	width: 1800,
- 		 	height: 1200
- 		 	}	
- 		 );
+		var movie = bonsai.run(
+			document.getElementById('movie'),
+			{
+				url: 'JSLindo.js',
+				width: 2000,
+				height: 2000
+		});
 	</script>
 	</body>
 </html>
