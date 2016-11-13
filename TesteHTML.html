@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+	<input id="evaluation" type="number" name="evalution" min="0" value="1000"/>
+	<button onclick="sendEvaluation()">Avaliações</button>
+	<input id="poligonal" type="checkbox" name="" checked onclick="selectPoligonal"/>
+    <label> Poligonal de controle </label>
+    <input id="pontos" type="checkbox" name="" checked onclick="selectPontos"/>
+    <label> Pontos de controle </label>
+    <input id="curva" type="checkbox" name="" checked onclick="selectCurva"/>
+    <label> Curva de Bézier </label>
+    <div id="movie" style="border-style: solid;border-color: pink;"></div>
+    <script src="bonsai-0.4.1.min.js"></script>
+	<div id="movie"></div>
+	<script>
+ 		 bonsai.run(document.getElementById('movie'), {
+ 		 	url: 'JSLindo.js',
+ 		 	width: 1800,
+ 		 	height: 1200
+ 		 	}	
+ 		 );
+	</script>
+	</body>
+</html>
