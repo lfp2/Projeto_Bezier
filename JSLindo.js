@@ -13,11 +13,12 @@ var showPontos = true
 
 
 stage.on('click', function(e) {
-	var existe = false
-	if(!existe){
-		circles.push(new Circle(e.x, e.y, 5).attr('fillColor', 'gray').addTo(stage))
+	
+		circles.push(new Circle(e.x, e.y, 5).attr('fillColor', 'gray').on('drag', function(evt){
+      		this.attr({x: evt.x, y:evt.y});
+    	}));
 		points.push(new Point(e.x, e.y))
-	}
+
 });
 
 
