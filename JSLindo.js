@@ -16,21 +16,23 @@ var showCurve = true;
 var showSecondCurve = true;
 var showDerivada = true;
 
+stage.on('message:receivePontosBox', function(data) {
+	showPoint = data.data;
+	getDraw();
+})
+
+stage.on('message:receivePoligonalBox', function(data) {
+	showPolygon = data.data;
+	getDraw();
+})
+
+stage.on('message:receiveCurvaBox', function(data) {
+	showCurve = data.data;
+	getDraw();
+})
+
 function getPointsDer1(){
-	var pathsPolygonDervidada1 = []
-	 var aux = []
-	 var aux2 = []
-	 var aux3 = []
-	 aux = points;
-	 t = 1/2
-	 for(var i = 0; i < aux.length-1; i++){
-	 	var ponto = new Point((t*aux[i].x + (1-t)*aux[i+1].x), (t*aux[i].y + (1-t)*aux[i+1].y))
-	 	var circulo = new Circle((t*aux[i].x + (1-t)*aux[i+1].x), (t*aux[i].y + (1-t)*aux[i+1].y), 7).attr('fillColor', 'red')
-	 	aux3.push(circulo)
-	 	aux2.push(ponto)
-	 }
-	 pointsDerivada1 = aux2
-	 circleDerivada1 = aux3
+	
 }
 
 

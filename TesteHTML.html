@@ -11,7 +11,7 @@
     <input id="pontos" type="checkbox" name="" checked onclick="selectPontos()"/>
     <label> Pontos de controle </label>
     <input id="curva" type="checkbox" name="" checked onclick="selectCurva()"/>
-    <label> Primeira Derivada </label>
+    <label> Curva </label>
     <input id="segundaCurva" type="checkbox" name="" checked onclick="selectSegundaCurva()"/>
     <label> Segunda derivada </label>
     <div id="movie" style="border-style: solid;border-color: pink;"></div>
@@ -24,6 +24,27 @@
 				width: 2000,
 				height: 2000
 		});
+
+		function selectPontos() {
+        var point_b = document.getElementById('pontos').checked
+        movie.sendMessage('receivePontosBox', {
+          data: point_b
+        });
+      }
+
+      function selectPoligonal() {
+        var polygon_b = document.getElementById('poligonal').checked
+        movie.sendMessage('receivePoligonalBox', {
+          data: polygon_b
+        });
+      }
+
+      function selectCurva() {
+        var curve_b = document.getElementById('curva').checked
+        movie.sendMessage('receiveCurvaBox', {
+          data: curve_b
+        });
+      }
 	</script>
 	</body>
 </html>
