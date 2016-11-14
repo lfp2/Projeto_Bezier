@@ -3,7 +3,7 @@ var points = [];
 var pointsDerivada1 = [];
 var circleDerivada1 = [];
 var pointsDerivada2 = [];
-var pathsPolygonDervidada1 = [];
+var pathsDervidada1 = [];
 var evaluations = 500;
 var pathsPolygonG = [];
 var pathsCurve = [];
@@ -16,22 +16,6 @@ var showCurve = true;
 var showSecondCurve = true;
 var showDerivada = true;
 
-function getPointsDer1(){
-	var mult= points.length-1; // pontos de controle
-	var deriv=[];
-	var aux = [];
-	var k;
-	var j;
-	for(var i=1;i<points.length;i++){
-		k=mult*(points[i].x-points[i-1].x)
-		j=mult*(points[i].y-points[i-1].y)
-		deriv.push(new Point(k,j))
-	}
-	aux.push(deriv[0].x)
-	aux.push(deriv[0].y)
-	var curva = new Path(aux).moveTo(0,0).stroke('purple', 1);
- 	 pathsPolygonDervidada1.push(curva);
-}
 
 stage.on('message:receivePontosBox', function(data) {
 	showPoint = data.data;
@@ -48,6 +32,44 @@ stage.on('message:receiveCurvaBox', function(data) {
 	getDraw();
 })
 
+function getDerivada(){
+	pathsDerivada1 = []
+	var curve = []
+  	if(points.length > 2){
+  		for (var t = 0; t <= 1; t+=1/evaluations) {
+    		var aux = [];
+    		aux = points;
+    		while (aux.length>1) {
+                /* minhas alteracoes */
+                // pegar os dois os ultimos pontos que geram o ponto da curva
+                // no caso eles sao tangetes ao ponto da curva
+                // e para achar o vetor da derivada do ponto da curva so subtrair esses pontos e multiplicar por n
+                if(aux.length == 2) 
+                {
+                    var vetor = new Point(points.length-1*(aux[1].x - aux[0].x),points.length-1*(aux[1].y - aux[0].y));
+
+                    //efetuar multiplicacao por escalar do vetor por (points.length - 1)
+                    //esse vetor resultante é a 1 derivada da curva
+                }
+                /* fim das minhas alteracoes */
+      			var aux2 = [];
+      			for (var i = 0; i < aux.length-1; i++) {
+        			var ponto = new Point((t*aux[i].x + (1-t)*aux[i+1].x), 
+        				(t*aux[i].y + (1-t)*aux[i+1].y)) //interpolacao
+        			aux2.push(ponto)
+      			}
+      			aux = aux2;
+    	}
+    	curve.push(vetor.x);
+    	curve.push(vetor.y);
+  	}
+  	var curva = new Path(curve).moveTo(points[0].x,points[0].y).stroke('red', 1);
+ 	 pathsDerivada1.push(curva);
+  }
+  
+}
+
+
 
 function getCasteljau(){
 	pathsCurve = []
@@ -59,7 +81,8 @@ function getCasteljau(){
     		while (aux.length>1) {
       			var aux2 = [];
       			for (var i = 0; i < aux.length-1; i++) {
-        			var ponto = new Point((t*aux[i].x + (1-t)*aux[i+1].x), (t*aux[i].y + (1-t)*aux[i+1].y))
+        			var ponto = new Point((t*aux[i].x + (1-t)*aux[i+1].x), 
+        				(t*aux[i].y + (1-t)*aux[i+1].y)) //interpolacao
         			aux2.push(ponto)
       			}
       			aux = aux2;
@@ -73,18 +96,6 @@ function getCasteljau(){
   
 }
 
-
-var getDerivBz=function(curve){
-	mult=curve.length-1; // pontos de controle
-	deriv=[];
-	for(var i=1;i<curve.length;i++){
-		var k;
-		k.x=mult*(curve[i].x-curve[i-1].x)
-		k.y=mult*(curve[i].y-curve[i-1].y)
-		deriv.push()
-	}
-	return deriv
-}
 
 
 function getDraw() {
@@ -105,8 +116,8 @@ function getDraw() {
 		})
 	}
 	if(showDerivada) {
-		pathsPolygonDervidada1.forEach(function(dev) {
-			stageObjects.push(dev)
+		pathsDerivada1.forEach(function(circ) {
+			stageObjects.push(circ)
 		})
 	}
 	stage.children(stageObjects)
@@ -137,8 +148,8 @@ stage.on('click', function(e) {
 
 		pathsPolygonG = pathsPolygon
 		getCasteljau()
+		getDerivada()
 		getDraw()
-		getPointsDer1()
 	}
 });
 

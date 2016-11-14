@@ -14,6 +14,8 @@
     <label> Curva </label>
     <input id="segundaCurva" type="checkbox" name="" checked onclick="selectSegundaCurva()"/>
     <label> Segunda derivada </label>
+    <input id="range" type="range" name="range" min = "0" max = "100">
+   	<button onclick="sendRange()">Range</button>
     <div id="movie" style="border-style: solid;border-color: pink;"></div>
 	<div id="movie"></div>
 	<script>
@@ -30,6 +32,13 @@
         	movie.sendMessage('receivePontosBox', {
           	data: point_b
         	});
+      	}
+
+      	function sendRange() {
+        	var rangeR = document.getElementById('range').value
+        	m.sendMessage('receiveRange', {
+          	data: rangeR
+        })
       	}
 
       	function selectPoligonal() {
