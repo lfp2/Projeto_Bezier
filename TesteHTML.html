@@ -6,12 +6,14 @@
 	<body>
 	<input id="evaluation" type="number" name="evalution" min="0" value="1000"/>
 	<button onclick="sendEvaluation()">Avaliações</button>
-	<input id="poligonal" type="checkbox" name="" checked onclick="selectPoligonal"/>
+	<input id="poligonal" type="checkbox" name="" checked onclick="selectPoligonal()"/>
     <label> Poligonal de controle </label>
-    <input id="pontos" type="checkbox" name="" checked onclick="selectPontos"/>
+    <input id="pontos" type="checkbox" name="" checked onclick="selectPontos()"/>
     <label> Pontos de controle </label>
-    <input id="curva" type="checkbox" name="" checked onclick="selectCurva"/>
-    <label> Curva de Bézier </label>
+    <input id="curva" type="checkbox" name="" checked onclick="selectCurva()"/>
+    <label> Primeira Derivada </label>
+    <input id="segundaCurva" type="checkbox" name="" checked onclick="selectSegundaCurva()"/>
+    <label> Segunda derivada </label>
     <div id="movie" style="border-style: solid;border-color: pink;"></div>
 	<div id="movie"></div>
 	<script>
