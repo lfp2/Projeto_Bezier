@@ -59,11 +59,6 @@ function getCasteljau(){
 }
 
 
-var getDeriv=function(curve,t){
-	auxiliar=getDerivBz(curve);
-	return "curve t casteljau";
-}
-
 var getDerivBz=function(curve){
 	mult=curve.length-1;
 	deriv=[];
@@ -73,7 +68,6 @@ var getDerivBz=function(curve){
 		k.y=mult*(curve[i].y-curve[i-1].y)
 		deriv.push()
 	}
-	return deriv
 }
 
 function getDraw() {
