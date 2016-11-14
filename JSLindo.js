@@ -16,6 +16,23 @@ var showCurve = true;
 var showSecondCurve = true;
 var showDerivada = true;
 
+function getPointsDer1(){
+	var mult= points.length-1; // pontos de controle
+	var deriv=[];
+	var aux = [];
+	var k;
+	var j;
+	for(var i=1;i<points.length;i++){
+		k=mult*(points[i].x-points[i-1].x)
+		j=mult*(points[i].y-points[i-1].y)
+		deriv.push(new Point(k,j))
+	}
+	aux.push(deriv[0].x)
+	aux.push(deriv[0].y)
+	var curva = new Path(aux).moveTo(0,0).stroke('purple', 1);
+ 	 pathsPolygonDervidada1.push(curva);
+}
+
 stage.on('message:receivePontosBox', function(data) {
 	showPoint = data.data;
 	getDraw();
@@ -30,10 +47,6 @@ stage.on('message:receiveCurvaBox', function(data) {
 	showCurve = data.data;
 	getDraw();
 })
-
-function getPointsDer1(){
-	
-}
 
 
 function getCasteljau(){
@@ -61,6 +74,19 @@ function getCasteljau(){
 }
 
 
+var getDerivBz=function(curve){
+	mult=curve.length-1; // pontos de controle
+	deriv=[];
+	for(var i=1;i<curve.length;i++){
+		var k;
+		k.x=mult*(curve[i].x-curve[i-1].x)
+		k.y=mult*(curve[i].y-curve[i-1].y)
+		deriv.push()
+	}
+	return deriv
+}
+
+
 function getDraw() {
 	var stageObjects = []
 	if(showCurve) {
@@ -79,11 +105,8 @@ function getDraw() {
 		})
 	}
 	if(showDerivada) {
-		circleDerivada1.forEach(function(circ) {
-			stageObjects.push(circ)
-		})
-		pathsPolygonDervidada1.forEach(function(circ) {
-			stageObjects.push(circ)
+		pathsPolygonDervidada1.forEach(function(dev) {
+			stageObjects.push(dev)
 		})
 	}
 	stage.children(stageObjects)

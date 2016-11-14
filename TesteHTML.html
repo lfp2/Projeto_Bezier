@@ -26,17 +26,17 @@
 		});
 
 		function selectPontos() {
-        var point_b = document.getElementById('pontos').checked
-        movie.sendMessage('receivePontosBox', {
-          data: point_b
-        });
-      }
+        	var point_b = document.getElementById('pontos').checked
+        	movie.sendMessage('receivePontosBox', {
+          	data: point_b
+        	});
+      	}
 
-      function selectPoligonal() {
-        var polygon_b = document.getElementById('poligonal').checked
-        movie.sendMessage('receivePoligonalBox', {
-          data: polygon_b
-        });
+      	function selectPoligonal() {
+        	var polygon_b = document.getElementById('poligonal').checked
+        	movie.sendMessage('receivePoligonalBox', {
+          	data: polygon_b
+        	});
       }
 
       function selectCurva() {
