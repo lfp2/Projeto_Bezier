@@ -17,6 +17,7 @@ var showSecondCurve = true;
 var showDerivada = true;
 
 function getPointsDer1(){
+	var pathsPolygonDervidada1 = []
 	 var aux = []
 	 var aux2 = []
 	 var aux3 = []
@@ -77,6 +78,9 @@ function getDraw() {
 	}
 	if(showDerivada) {
 		circleDerivada1.forEach(function(circ) {
+			stageObjects.push(circ)
+		})
+		pathsPolygonDervidada1.forEach(function(circ) {
 			stageObjects.push(circ)
 		})
 	}
